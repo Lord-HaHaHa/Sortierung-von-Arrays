@@ -23,8 +23,24 @@ foreach (int item in data_heap)
 System.Console.WriteLine();
 */
 
+/*
 System.Console.WriteLine("CountSort");
-int[]data_CountingSort = CountingSort.Sort(data_raw);
+int[] data_CountingSort = CountingSort.Sort(data_raw);
 foreach (int item in data_CountingSort)
+    System.Console.Write($"{item},");
+System.Console.WriteLine();
+*/
+
+/*
+System.Console.WriteLine("InsertionSort");
+int[] data_inserionSort = InsertionSort.sort(data_raw);
+foreach (int item in data_inserionSort)
+    System.Console.Write($"{item},");
+System.Console.WriteLine();
+*/
+
+System.Console.WriteLine("RandomSort");
+int[] data_randomSort = RandomSort.sort(data_raw);
+foreach (int item in data_randomSort)
     System.Console.Write($"{item},");
 System.Console.WriteLine();
