@@ -10,6 +10,8 @@ namespace Sortierung_von_Arrays
 {
     internal class CountingSort
     {
+        public static int counter = 0;
+
         public static int[] Sort(int[] data)
         {
             // Generate Counter Array
@@ -42,6 +44,7 @@ namespace Sortierung_von_Arrays
                 int idx = count[item];
                 count[item]--;
                 ret_data[idx-1] = item;
+                counter++;
             }
 
             return ret_data;

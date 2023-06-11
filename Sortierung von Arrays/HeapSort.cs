@@ -10,6 +10,8 @@ namespace Sortierung_von_Arrays
 {
     static class HeapSort
     {
+        public static int counter = 0;
+
         static private int getChildBitMap(int[] data, int j, int idx_last = -1)
         {
             if(idx_last == -1)
@@ -32,7 +34,6 @@ namespace Sortierung_von_Arrays
         {
             for (int j = data.Length-1; j >= 0; j--)
             {
-                PrintHeap(data, j);
                 DownHeap(data, j);
             }
             return data;
@@ -46,38 +47,33 @@ namespace Sortierung_von_Arrays
             {
                 // Do nothing
                 case(0):
-                    Console.WriteLine($"No Childs {idx_logic}");
                     break;
                 // Only right Child 
                 case (1):
-                    Console.WriteLine($"Right Child {idx_logic}");
-                    Console.WriteLine($"Check: data[idx]:{data[idx]}, data[2idx-l]:{data[idx_logic * 2]}");
                     if (data[idx] > data[2 * idx_logic])
                     {
+                        counter++;
                         (data[2 * idx_logic], data[idx]) = (data[idx], data[idx_logic * 2]);
                     }
                     break;
                 // Only left Child
                 case (2):
-                    Console.WriteLine($"Left Child {idx_logic}");
-                    Console.WriteLine($"Check: data[idx]:{data[idx]}, data[2idx-l-1]:{data[idx_logic * 2 - 1]}");
                     if (data[idx] > data[2 * idx_logic-1])
                     {
+                        counter++;
                         (data[2 * idx_logic-1], data[idx]) = (data[idx], data[idx_logic * 2-1]);
                     }
                     break;
                 // Both Child´s
                 case(3):
-                    Console.WriteLine($"Both Childs {idx_logic}");
                     int idx_swap = 0;
                     if (data[idx_logic * 2] < data[idx_logic * 2 - 1])
                         idx_swap = idx_logic * 2;
                     else
                         idx_swap = idx_logic * 2 - 1;
-                    Console.WriteLine($"Smaller Child:{data[idx_swap]}");
                     if (data[idx] > data[idx_swap])
                     {
-                        Console.WriteLine("Swap");
+                        counter++;
                         (data[idx_swap], data[idx]) = (data[idx], data[idx_swap]);
                     }
                     break;
@@ -92,25 +88,19 @@ namespace Sortierung_von_Arrays
             Console.WriteLine("--- Generate Min Heap: ---");
             data = BuildMinHeap(data);
             PrintHeap(data);
+            Console.WriteLine($"Needed Swaps to generate the Heap; {counter}");
             Console.WriteLine("--- Sorting with HeapSort ---");
             for(int i = 0; i<data.Length; i++)
             {
                 (data[0], data[data.Length - 1 - i]) = (data[data.Length - 1 - i], data[0]);
+                counter++;
                 DownHeap(data, 0, data.Length-1-i);
-                foreach (int item in data)
-                    System.Console.Write($"{item},");
-                System.Console.WriteLine();
             }
             return data;
         }
 
         static public void PrintHeap(int[] data, int idx = -1)
         {
-            if(idx >0 && idx<data.Length)
-                System.Console.WriteLine($"-----{data[idx]}-----");
-            else
-                System.Console.WriteLine($"----------");
-
             int i = 0;
             while(i < data.Length)
             {

@@ -8,18 +8,18 @@ namespace Sortierung_von_Arrays
 {
     internal static class RandomSort
     {
+        public static int counter = 0;
+
         public static int[] sort(int[] data)
         {
-            int count = 0;
             while (!isSorted(data))
             {                               
                 Random random = new Random();
                 int r1 = random.Next(data.Length);
                 int r2 = random.Next(data.Length);
                 (data[r1], data[r2]) = (data[r2], data[r1]);
-                count++;
+                counter++;
             }
-            Console.WriteLine($"Needed Swaps: {count}");
             return data;
         }
         static private bool isSorted(int[] data)

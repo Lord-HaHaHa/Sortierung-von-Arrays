@@ -8,9 +8,9 @@ namespace Sortierung_von_Arrays
 {
     public static class Quicksort
     {
+        public static int counter = 0;
         public static int[] sort(int[] data, int i=0, int j=0)
         {
-            System.Console.Write($"{i} {j}\n");
 
             if (i < j)
             {
@@ -27,12 +27,14 @@ namespace Sortierung_von_Arrays
                     if (l < r)
                     {
                         (data[r], data[l]) = (data[l], data[r]);
+                        counter++;
                         l++;
                         r--;
                     }
                     else break;
                 }
                 (data[j], data[l]) = (data[l], data[j]);
+                counter++;
                 Quicksort.sort(data, i, l - 1);
                 Quicksort.sort(data, l+1, j);
             }
